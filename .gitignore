@@ -3,4 +3,7 @@
 .vscode
 *.env
 *.log*
-join-config-map
+
+
+# Executable
+mia-init-container
