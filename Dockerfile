@@ -1,9 +1,9 @@
 ############################
 # STEP 1 build executable binary
 ############################
-FROM golang:1.14 AS builder
+FROM golang:1.16 AS builder
 
-WORKDIR /app
+WORKDIR /build
 
 COPY go.mod .
 COPY go.sum .
@@ -13,11 +13,11 @@ RUN go mod verify
 
 COPY . .
 
-RUN GOOS=linux CGO_ENABLED=0 GOARCH=amd64 go build -ldflags="-w -s" -o main .
+RUN GOOS=linux CGO_ENABLED=0 GOARCH=amd64 go build -ldflags="-w -s" -o mic ./cmd/mia-init-container
 
 WORKDIR /app/build
 
-RUN cp -r /app/main /app/LICENSE .
+RUN cp -r /app/mic /app/LICENSE .
 
 ############################
 # STEP 2 build service image
@@ -40,4 +40,4 @@ COPY --from=builder /app/build/* ./
 # Use an unprivileged user.
 USER 1000
 
-CMD ["/app/main"]
+CMD ["/app/mic"]
