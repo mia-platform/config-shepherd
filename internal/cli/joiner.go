@@ -17,23 +17,25 @@ package cli
 import (
 	"join-config-map/internal/utils"
 	"join-config-map/pkg/joiner"
+
 	"github.com/spf13/cobra"
 )
 
 // ConfigMapJoinerSubcommand add configMapJoiner subcommand to the main command
 func ConfigMapJoinerSubcommand(cmd *cobra.Command, options *utils.Options) {
-	var inputPaths []string
+	var inputDirs []string
+	var outputDir string
 
 	configMapJoinerCmd := &cobra.Command{
 		Use:   "joiner",
 		Short: "join splitted configmaps into one single configmap",
 		Long:  "",
 		Run: func(cmd *cobra.Command, args []string) {
-			joiner.Run(inputPaths, options)
+			joiner.Run(inputDirs, outputDir, options)
 		},
 	}
 
-	configMapJoinerCmd.Flags().StringSliceVarP(&inputPaths, "filename", "f", []string{}, "file and/or folder paths containing data to interpolate")
-
+	configMapJoinerCmd.Flags().StringSliceVar(&inputDirs, "input-dirs", []string{}, "file and/or folder paths containing data to interpolate")
+	configMapJoinerCmd.Flags().StringVar(&outputDir, "output-dir", "", "file and/or folder paths containing data to interpolate")
 	cmd.AddCommand(configMapJoinerCmd)
 }
