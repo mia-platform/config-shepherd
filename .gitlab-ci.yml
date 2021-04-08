@@ -7,4 +7,4 @@ default:
   image: golang:1.14.6
 
 variables:
-  IMAGE_NAME: platform-development/join-config-map
+  IMAGE_NAME: tools/config-shepherd
