@@ -4,6 +4,5 @@
 *.env
 *.log*
 
-
 # Executable
-mia-init-container
+/mia-init-container
