@@ -3,7 +3,7 @@
 ############################
 FROM golang:1.16 AS builder
 
-WORKDIR /build
+WORKDIR /app
 
 COPY go.mod .
 COPY go.sum .
@@ -35,9 +35,9 @@ LABEL maintainer="undefined" \
 
 WORKDIR /app
 
-COPY --from=builder /app/build/* ./
+COPY --from=builder /app/build/* /usr/local/bin/
 
 # Use an unprivileged user.
 USER 1000
 
-CMD ["/app/mic"]
+CMD ["mic"]
