@@ -15,11 +15,18 @@
 package cli
 
 import (
-	"join-config-map/internal/utils"
-	"join-config-map/pkg/joiner"
+	"encoding/json"
+	"fmt"
+
+	"git.tools.mia-platform.eu/platform/devops/config-shepherd/internal/utils"
+	"git.tools.mia-platform.eu/platform/devops/config-shepherd/pkg/joiner"
 
 	"github.com/spf13/cobra"
 )
+
+type splittedMapValue struct {
+	Directories []string `json:"directories"`
+}
 
 // ConfigMapJoinerSubcommand add configMapJoiner subcommand to the main command
 func ConfigMapJoinerSubcommand(cmd *cobra.Command, options *utils.Options) {
@@ -28,14 +35,44 @@ func ConfigMapJoinerSubcommand(cmd *cobra.Command, options *utils.Options) {
 
 	configMapJoinerCmd := &cobra.Command{
 		Use:   "joiner",
-		Short: "join splitted configmaps into one single configmap",
+		Short: "join splitted files into one single file",
 		Long:  "",
-		Run: func(cmd *cobra.Command, args []string) {
-			joiner.Run(inputDirs, outputDir, options)
+		RunE: func(cmd *cobra.Command, args []string) error {
+
+			if inputDirs != nil && outputDir != "" {
+				joiner.Run(inputDirs, outputDir)
+				return nil
+			}
+
+			if inputDirs != nil || outputDir != "" {
+				return fmt.Errorf("inputDirs or outputDir is missing")
+			}
+
+			var splittedMap = map[string]splittedMapValue{}
+			if options.SplittedMap == "" {
+				return fmt.Errorf("configuration not exist")
+			}
+
+			unmarshalSplittedMap, err := unmarshalSplittedMap([]byte(options.SplittedMap))
+			utils.CheckError(err)
+			splittedMap = unmarshalSplittedMap
+			for outDirKey, splittedMapValue := range splittedMap {
+				inputDirs = splittedMapValue.Directories
+				joiner.Run(inputDirs, outDirKey)
+			}
+			return nil
 		},
 	}
 
-	configMapJoinerCmd.Flags().StringSliceVar(&inputDirs, "input-dirs", []string{}, "file and/or folder paths containing data to interpolate")
-	configMapJoinerCmd.Flags().StringVar(&outputDir, "output-dir", "", "file and/or folder paths containing data to interpolate")
+	configMapJoinerCmd.Flags().StringSliceVar(&inputDirs, "input-dirs", []string{}, "folder paths containing data to join")
+	configMapJoinerCmd.Flags().StringVar(&outputDir, "output-dir", "", "folder name where the joined files will be saved")
 	cmd.AddCommand(configMapJoinerCmd)
+}
+
+func unmarshalSplittedMap(data []byte) (map[string]splittedMapValue, error) {
+	var splittedMap = map[string]splittedMapValue{}
+	if err := json.Unmarshal(data, &splittedMap); err != nil {
+		return nil, err
+	}
+	return splittedMap, nil
 }

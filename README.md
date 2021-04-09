@@ -1,26 +1,15 @@
-# join-config-map
+# Mia Config Shepherd
 
-This is a simple Go application template with a pre-configured [logger]("https://github.com/mia-platform/glogger") and a [library]("https://github.com/mia-platform/configlib") to handle configuration file and env variables.
-It also contains basic dependencies for testing and http request.
-By default the module name is "service", if you want to change it, please remember to change it in the imports too.
+## Config Shepherd Command Line Tool
+
+`config-shepherd` is a command line tool responsible for configuring a container using inside an initContainer of a k8s deployment.
+
+The main subcommands that the tool has are:
+
+- `joiner`: join all the same file in a list of directory and write them in an output directory
+
 
 ## Development Local
 
-To develop the service locally you need:
-    - Go 1.13+
-
-To start the application locally
-
-```go
-go run join-config-map
-```
-
-By default the service will run on port 8080, to change the port please set `HTTP_PORT` env variable
-
-## Testing
-
-To test the application use:
-
-```go
-go test -v
-```
+**build**: to build the script run: `go build ./cmd/config-shepherd/...`  
+**test**: to test the script run: `go test ./... -v`

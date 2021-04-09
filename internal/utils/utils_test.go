@@ -29,8 +29,8 @@ func TestExtractFilesFromDir(t *testing.T) {
 		filesPath, err := ExtractFilesFromDir(folder)
 
 		expected := map[string]string{
-			"pippo.json": "testdata/folder/pippo.json",
-			"pluto.json": "testdata/folder/pluto.json",
+			"bar.json": "testdata/folder/bar.json",
+			"foo.json": "testdata/folder/foo.json",
 		}
 		require.Nil(t, err)
 		require.Equal(t, expected, filesPath)

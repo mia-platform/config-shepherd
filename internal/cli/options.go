@@ -15,30 +15,19 @@
 package cli
 
 import (
-	// "os"
+	"os"
 
-	"join-config-map/internal/utils"
-	"github.com/spf13/cobra"
-	"k8s.io/cli-runtime/pkg/genericclioptions"
+	"git.tools.mia-platform.eu/platform/devops/config-shepherd/internal/utils"
+)
+
+const (
+	SPLITTED_MAP = "SPLITTED_MAP"
 )
 
 // New create a new options struct
 func New() *utils.Options {
 	options := &utils.Options{
-		// Kubeconfig: os.Getenv("KUBECONFIG"),
+		SplittedMap: os.Getenv(SPLITTED_MAP),
 	}
-
-	// bind to kubernetes config flags
-	options.Config = &genericclioptions.ConfigFlags{
-		// CAFile:       &options.CertificateAuthority,
-	}
-
 	return options
-}
-
-// AddGlobalFlags add to the cobra command all the global flags
-func AddGlobalFlags(cmd *cobra.Command, options *utils.Options) {
-
-	// flags := cmd.PersistentFlags()
-	// flags.StringVarP(&options.CertificateAuthority, "certificate-authority", "", "", "Path to a cert file for the certificate authority")
 }

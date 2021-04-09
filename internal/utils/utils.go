@@ -25,7 +25,8 @@ import (
 
 // Options global option for the cli that can be passed to all commands
 type Options struct {
-	Config *genericclioptions.ConfigFlags
+	Config      *genericclioptions.ConfigFlags
+	SplittedMap string
 }
 
 // fs return the file system to use by default (override it for tests)

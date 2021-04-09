@@ -18,21 +18,27 @@ import (
 	"fmt"
 	"path/filepath"
 
-	"join-config-map/internal/utils"
+	"git.tools.mia-platform.eu/platform/devops/config-shepherd/internal/utils"
 )
 
 // Run execute the joiner command from cli
-func Run(inputDirs []string, outDir string, opts *utils.Options) {
+func Run(inputDirs []string, outDir string) {
+	absOutDir, err := filepath.Abs(outDir)
+	utils.CheckError(err)
+
+	err = utils.MkdirAll(absOutDir)
+	utils.CheckError(err)
 
 	filesMapping, err := extractFilesParts(inputDirs)
 	utils.CheckError(err)
 
-	err = joinAllFiles(filesMapping, outDir)
+	err = joinAllFiles(filesMapping, absOutDir)
 	utils.CheckError(err)
 }
 
 // ExtractAllFiles return a map of all filenames from array of directories
 func extractFilesParts(paths []string) (map[string][]string, error) {
+	fmt.Printf("EXTRACTING files parts from %s\n", paths)
 	filesMapping := map[string][]string{}
 	// Extract files from directories
 	for _, path := range paths {
@@ -71,8 +77,11 @@ func joinAllFiles(filesMapping map[string][]string, outDir string) error {
 		finalContent, err := joinFileParts(paths)
 		utils.CheckError(err)
 
-		finalGlobalPath, err := filepath.Abs(filepath.Join(outDir, key))
+		filePath := filepath.Join(outDir, key)
+		finalGlobalPath, err := filepath.Abs(filePath)
 		utils.CheckError(err)
+
+		fmt.Printf("CREATING file %s\n", filePath)
 		_, err = utils.CreateFile(finalGlobalPath)
 		utils.CheckError(err)
 
