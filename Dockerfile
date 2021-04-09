@@ -13,7 +13,7 @@ RUN go mod verify
 
 COPY . .
 
-RUN GOOS=linux CGO_ENABLED=0 GOARCH=amd64 go build -ldflags="-w -s" -o mic ./cmd/mia-init-container
+RUN GOOS=linux CGO_ENABLED=0 GOARCH=amd64 go build -ldflags="-w -s" -o mic ./cmd/config-shepherd
 
 WORKDIR /app/build
 
