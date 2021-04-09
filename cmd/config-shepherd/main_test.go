@@ -19,31 +19,31 @@ package main
 import (
 	"testing"
 
-	"join-config-map/internal/cli"
+	"git.tools.mia-platform.eu/platform/devops/config-shepherd/internal/cli"
 	"github.com/stretchr/testify/require"
 )
 
 func Test_versionFormat(t *testing.T) {
 	t.Run("version string with no args", func(t *testing.T) {
-		expected := "mia-init-container version: "
+		expected := "config-shepherd version: "
 		version := versionFormat("", "")
 		require.Equal(t, expected, version, "version expected is different from output")
 	})
 
 	t.Run("version string with only version string", func(t *testing.T) {
-		expected := "mia-init-container version: 1.0.0"
+		expected := "config-shepherd version: 1.0.0"
 		version := versionFormat("1.0.0", "")
 		require.Equal(t, expected, version, "version expected is different from output")
 	})
 
 	t.Run("version string with version and date strings", func(t *testing.T) {
-		expected := "mia-init-container version: 1.0.0 (2020-01-01)"
+		expected := "config-shepherd version: 1.0.0 (2020-01-01)"
 		version := versionFormat("1.0.0", "2020-01-01")
 		require.Equal(t, expected, version, "version expected is different from output")
 	})
 
 	t.Run("version from cli module defaults", func(t *testing.T) {
-		expected := "mia-init-container version: DEV"
+		expected := "config-shepherd version: DEV"
 		version := versionFormat(cli.Version, cli.BuildDate)
 		require.Equal(t, expected, version, "version expected is different from output")
 	})

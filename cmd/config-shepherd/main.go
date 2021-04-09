@@ -17,12 +17,12 @@
 package main
 
 import (
-	"os"
 	"flag"
 	"fmt"
+	"os"
 	"runtime"
 
-	"join-config-map/internal/cli"
+	"git.tools.mia-platform.eu/platform/devops/config-shepherd/internal/cli"
 	"github.com/spf13/cobra"
 )
 
@@ -30,30 +30,27 @@ var options = cli.New()
 
 func main() {
 	rootCmd := &cobra.Command{
-		Short: "mia-init-container CLI",
-		Long: "Join Splitted Configmaps into one",
-		Use: "mia-init-container", // da capire: mlp usa mlp
+		Short: "config-shepherd CLI",
+		Long:  "Configure a container before lauching it",
+		Use:   "config-shepherd",
 
 		SilenceErrors: true,
 		SilenceUsage:  true,
-		Example: "", // da capire: mlp usa heredoc: "github.com/MakeNowJust/heredoc/v2"
+		Example:       `$ config-shepherd joiner --input-dirs './folder, ./folder2' --output-dirs 'output' --root-dir './rootDir'`,
 	}
-
 
 	versionOutput := versionFormat(cli.Version, cli.BuildDate)
 	// Version subcommand
 	rootCmd.AddCommand(&cobra.Command{
 		Use:   "version",
-		Short: "Show mia-init-container version",
-		Long:  "Show mia-init-container version",
+		Short: "Show config-shepherd version",
+		Long:  "Show config-shepherd version",
 		Run: func(cmd *cobra.Command, args []string) {
 			fmt.Println(versionOutput)
 		},
 	})
 
-	cli.AddGlobalFlags(rootCmd, options)
 	cli.ConfigMapJoinerSubcommand(rootCmd, options)
-	
 	expandedArgs := []string{}
 	if len(os.Args) > 0 {
 		expandedArgs = os.Args[1:]
@@ -66,14 +63,13 @@ func main() {
 	}
 }
 
-
 // versionFormat return the version string nicely formatted
 func versionFormat(version, buildDate string) string {
 	if buildDate != "" {
 		version = fmt.Sprintf("%s (%s)", version, buildDate)
 	}
 
-	version = fmt.Sprintf("mia-init-container version: %s", version)
+	version = fmt.Sprintf("config-shepherd version: %s", version)
 	// don't return GoVersion during a test run for consistent test output
 	if flag.Lookup("test.v") != nil {
 		return version

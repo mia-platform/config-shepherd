@@ -1,8 +1,11 @@
+## Ignore
 *.DS_Store
 .idea
-.vscode
+.vscode/*
 *.env
 *.log*
 
 # Executable
-/mia-init-container
+/config-shepherd
+## Allow
+!.vscode/settings.json
