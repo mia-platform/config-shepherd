@@ -13,3 +13,16 @@ The main subcommands that the tool has are:
 
 **build**: to build the script run: `go build ./cmd/config-shepherd/...`  
 **test**: to test the script run: `go test ./... -v`
+
+## Usage
+
+* run `config-shepherd`  
+    with:
+    * `--input-dirs`: a list of directories paths containing the splitted files
+    * `--output-dir`: a directory path where to put the joined final filesPath  
+
+   or:  
+    * `--config-name`: name of the config file (must be a json file) 
+    * `--config-path`: path to the config file
+
+Reminder: you can only use one of the two, and if you choose the latter your config file must follow the rule defined in `./config.schema.json`

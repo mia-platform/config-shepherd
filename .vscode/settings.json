@@ -1,5 +1,10 @@
 {
     "files.associations": {
-        "*.json": "Plain Text"
+        "**/testdata/configmap-1-split-0/*.json": "Plain Text",
+        "**/testdata/configmap-1-split-1/*.json": "Plain Text",
+        "**/testdata/configmap-2-split-0/*.json": "Plain Text",
+        "**/testdata/configmap-2-split-1/*.json": "Plain Text",
+        "**/testdata/configmap-2-split-2/*.json": "Plain Text",
+        "**/testdata/notJson.test.json": "Plain Text",
     }
 }

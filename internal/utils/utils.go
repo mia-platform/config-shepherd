@@ -49,8 +49,16 @@ func ExtractFilesFromDir(directoryPath string) (map[string]string, error) {
 		return nil, err
 	}
 	for _, path := range files {
-		if !path.IsDir() {
-			filesPath[path.Name()] = filepath.Join(directoryPath, path.Name())
+		finalPath := filepath.Join(directoryPath, path.Name())
+		isADir, err := IsADir(finalPath)
+		if err != nil {
+			return nil, err
+		}
+
+		// In this case we use IsADir instead path.IsDir() because we can take into
+		// consideration also symlink to directory.
+		if !isADir {
+			filesPath[path.Name()] = finalPath
 		}
 	}
 	return filesPath, nil
