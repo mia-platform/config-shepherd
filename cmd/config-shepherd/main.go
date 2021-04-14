@@ -26,8 +26,6 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var options = cli.New()
-
 func main() {
 	rootCmd := &cobra.Command{
 		Short: "config-shepherd CLI",
@@ -50,7 +48,7 @@ func main() {
 		},
 	})
 
-	cli.ConfigMapJoinerSubcommand(rootCmd, options)
+	cli.ConfigMapJoinerSubcommand(rootCmd)
 	expandedArgs := []string{}
 	if len(os.Args) > 0 {
 		expandedArgs = os.Args[1:]

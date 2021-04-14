@@ -1,0 +1,10 @@
+{
+    "splittedMaps": [
+        {
+            "inputMountPaths": [
+                "./pkg/joiner/testdata/configmap-1-split-0",
+                "./pkg/joiner/testdata/configmap-1-split-1"
+            ]
+        }
+    ]
+}

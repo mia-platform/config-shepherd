@@ -57,7 +57,7 @@ func extractFilesParts(paths []string) (map[string][]string, error) {
 		if isADirectory {
 			pathsInDirectory, err := utils.ExtractFilesFromDir(globalPath)
 			if err != nil {
-				return nil, err
+				return nil, fmt.Errorf("cannot extract paths: %s\n", err.Error())
 			}
 			for key, path := range pathsInDirectory {
 				if val, ok := filesMapping[key]; ok {
@@ -97,7 +97,6 @@ func joinFileParts(paths []string) ([]byte, error) {
 	for _, path := range paths {
 		content, err := utils.ReadFile(path)
 		utils.CheckError(err)
-
 		finalContents = append(finalContents, content...)
 	}
 	return finalContents, nil

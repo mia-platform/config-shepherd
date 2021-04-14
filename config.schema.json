@@ -1,0 +1,30 @@
+{
+  "type": "object",
+  "properties": {
+    "splittedMaps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+            "outputMountPath": {
+                "type": "string",
+                "pattern": "[^:]+"
+            },
+            "inputMountPaths": {
+                "type": "array",
+                "items": {
+                    "type": "string",
+                    "pattern": "[^:]+"
+                },
+                "minItems": 1,
+                "uniqueItems": true
+            }
+        },
+        "additionalProperties": false,
+        "required": ["outputMountPath", "inputMountPaths"]
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": ["splittedMaps"]
+}
