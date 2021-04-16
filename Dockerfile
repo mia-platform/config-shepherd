@@ -36,7 +36,7 @@ LABEL maintainer="undefined" \
 WORKDIR /app
 
 COPY --from=builder /app/build/* /usr/local/bin/
-
+COPY --from=builder /app/build/config.schema.json .
 # Use an unprivileged user.
 USER 1000
 
