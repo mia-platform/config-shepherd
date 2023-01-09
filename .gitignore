@@ -4,6 +4,7 @@
 .vscode/*
 *.env
 *.log*
+coverage.out
 
 # Executable
 /config-shepherd
