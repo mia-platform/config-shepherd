@@ -1,3 +1,5 @@
+> ⚠ This file is deprecated. Releases after 1.0.0 use GitHub built-in releases to track changes ⚠
+
 # CHANGELOG
 
 All notable changes to this project will be documented in this file.
@@ -6,10 +8,6 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
-
-### Changed
-
-- [RJMR-267](https://makeitapp.atlassian.net/browse/RJMR-267): added makefile and github actions. Updated dependencies.
 
 ## 1.0.0 - 20-04-2021
 
