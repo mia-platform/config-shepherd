@@ -1,6 +1,6 @@
 module git.tools.mia-platform.eu/platform/devops/config-shepherd
 
-go 1.18
+go 1.19
 
 require (
 	github.com/mia-platform/configlib v1.0.0
