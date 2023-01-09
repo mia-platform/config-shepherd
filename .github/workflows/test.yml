@@ -44,7 +44,7 @@ jobs:
         with:
           images: |
             ghcr.io/mia-platform/config-sheperd
-            docker.io/miaplatform/configsheperd
+            docker.io/miaplatform/config-sheperd
           tags: |
             type=ref,event=branch
             type=semver,pattern={{version}}

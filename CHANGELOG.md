@@ -7,7 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## Unreleased
 
+### Changed
+
+- [RJMR-267](https://makeitapp.atlassian.net/browse/RJMR-267): added makefile and github actions. Updated dependencies.
+
 ## 1.0.0 - 20-04-2021
 
-  - [BMP-942](https://makeitapp.atlassian.net/browse/BMP-942): Initial implementation
-    - command line tool that merges mapped configurations in provided config file
+- [BMP-942](https://makeitapp.atlassian.net/browse/BMP-942): Initial implementation
+  - command line tool that merges mapped configurations in provided config file
