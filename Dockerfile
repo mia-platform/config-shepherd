@@ -33,7 +33,7 @@ LABEL maintainer="undefined" \
   eu.mia-platform.url="https://www.mia-platform.eu" \
   vcs.sha="$COMMIT_SHA"
 
-ENV VERSION="1.6.2"
+ENV VERSION="1.0.1"
 
 WORKDIR /app
 
