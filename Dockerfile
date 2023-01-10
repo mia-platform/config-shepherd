@@ -33,6 +33,8 @@ LABEL maintainer="undefined" \
   eu.mia-platform.url="https://www.mia-platform.eu" \
   vcs.sha="$COMMIT_SHA"
 
+ENV VERSION="1.6.2"
+
 WORKDIR /app
 
 COPY --from=builder /app/build/* /usr/local/bin/

@@ -20,7 +20,7 @@ build:
 
 .PHONY: version
 version:
-	sed -i.bck "s|SERVICE_VERSION=\"[0-9]*.[0-9]*.[0-9]*.*\"|SERVICE_VERSION=\"${VERSION}\"|" "Dockerfile"
+	sed -i.bck "s|VERSION=\"[0-9]*.[0-9]*.[0-9]*.*\"|VERSION=\"${VERSION}\"|" "Dockerfile"
 	rm -fr "Dockerfile.bck"
 	git add "Dockerfile"
 	git commit -m "Upgrade version to v${VERSION}"
