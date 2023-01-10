@@ -43,8 +43,8 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: |
-            ghcr.io/mia-platform/config-sheperd
-            docker.io/miaplatform/config-sheperd
+            ghcr.io/mia-platform/config-shepherd
+            docker.io/miaplatform/config-shepherd
           tags: |
             type=ref,event=branch
             type=semver,pattern={{version}}
